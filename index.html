@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Akshay Damle — Security, AI &amp; open tools</title>
+  <meta name="description" content="Akshay Damle builds open, evidence-first software across security, AI and the web — testbeds, analyzers and interactive explainers. Featured: CrawlerLab and Blast Radius.">
+  <meta name="theme-color" content="#5b16e0">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Akshay Damle — Catching what's designed to look human">
+  <meta property="og:description" content="Open, evidence-first software across security, AI and the web.">
+  <meta property="og:image" content="assets/img/crawlerlab-labyrinth.webp">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%235b16e0'/%3E%3Cpath fill='%23d4ff3d' d='M11 3h2v2h-2zM11 19h2v2h-2zM3 11h2v2H3zM19 11h2v2h-2zM6 6h2v2H6zM16 6h2v2h-2zM6 16h2v2H6zM16 16h2v2h-2zM10 10h4v4h-4z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="assets/css/fonts.css">
+  <link rel="stylesheet" href="assets/css/style.css?v=20261013">
+  <script>
+    document.documentElement.classList.add('js');
+    (function () {
+      var p = new URLSearchParams(location.search).get('palette');
+      if (p && /^[a-z]+$/.test(p)) document.documentElement.setAttribute('data-palette', p);
+    })();
+    setTimeout(function () { if (!window.__booted) document.documentElement.classList.add('no-motion'); }, 2500);
+  </script>
+  <script defer src="assets/vendor/gsap.min.js"></script>
+  <script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script defer src="assets/vendor/lenis.min.js"></script>
+  <script defer src="assets/js/print.js?v=20261002"></script>
+  <script defer src="assets/js/dither.js?v=20261002"></script>
+  <script defer src="assets/js/labs.js?v=20261013"></script>
+  <script defer src="assets/js/main.js?v=20261013"></script>
+</head>
+<body>
+  <a class="skip" href="#work">Skip to work</a>
+
+  <!-- Pixel icon set (24 × 24 grid, 2-unit pixels) -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="px-mark" viewBox="0 0 24 24"><path d="M11 3h2v2h-2zM11 19h2v2h-2zM3 11h2v2H3zM19 11h2v2h-2zM6 6h2v2H6zM16 6h2v2h-2zM6 16h2v2H6zM16 16h2v2h-2zM10 10h4v4h-4z"/></symbol>
+    <symbol id="px-spark" viewBox="0 0 24 24"><path d="M11 3h2v4h-2zM11 17h2v4h-2zM3 11h4v2H3zM17 11h4v2h-4zM11 7h2v10h-2zM7 11h10v2H7zM9 9h2v2H9zM13 9h2v2h-2zM9 13h2v2H9zM13 13h2v2h-2z"/></symbol>
+    <symbol id="px-target" viewBox="0 0 24 24"><path d="M11 2h2v6h-2zM11 16h2v6h-2zM2 11h6v2H2zM16 11h6v2h-6zM11 11h2v2h-2zM5 5h4v2H5zM5 7h2v2H5zM15 5h4v2h-4zM17 7h2v2h-2zM5 17h4v2H5zM5 15h2v2H5zM15 17h4v2h-4zM17 15h2v2h-2z"/></symbol>
+    <symbol id="px-sliders" viewBox="0 0 24 24"><path d="M5 3h2v18H5zM11 3h2v18h-2zM17 3h2v18h-2zM3 14h6v3H3zM9 6h6v3H9zM15 11h6v3h-6z"/></symbol>
+    <symbol id="px-check" viewBox="0 0 24 24"><path d="M3 3h18v2H3zM3 19h18v2H3zM3 5h2v14H3zM19 5h2v14h-2zM7 11h2v2H7zM9 13h2v2H9zM11 11h2v2h-2zM13 9h2v2h-2zM15 7h2v2h-2z"/></symbol>
+    <symbol id="px-layers" viewBox="0 0 24 24"><path d="M6 3h12v2H6zM4 5h2v2H4zM18 5h2v2h-2zM6 7h12v2H6zM2 11h2v2H2zM20 11h2v2h-2zM4 13h16v2H4zM2 17h2v2H2zM20 17h2v2h-2zM4 19h16v2H4z"/></symbol>
+    <symbol id="px-key" viewBox="0 0 24 24"><path d="M4 7h6v2H4zM2 9h2v6H2zM10 9h2v6h-2zM4 15h6v2H4zM6 11h2v2H6zM12 11h10v2H12zM18 13h2v3h-2zM15 13h2v2h-2z"/></symbol>
+    <symbol id="px-frame" viewBox="0 0 24 24"><path d="M2 4h20v2H2zM2 18h20v2H2zM2 6h2v12H2zM20 6h2v12h-2zM15 8h3v3h-3zM5 14h12v2H5zM7 12h8v2H7zM9 10h4v2H9z"/></symbol>
+    <symbol id="px-term" viewBox="0 0 24 24"><path d="M2 3h20v2H2zM2 19h20v2H2zM2 5h2v14H2zM20 5h2v14h-2zM6 8h2v2H6zM8 10h2v2H8zM6 12h2v2H6zM11 13h7v2h-7z"/></symbol>
+    <symbol id="px-arrow" viewBox="0 0 24 24"><path d="M8 4h12v2H8zM18 6h2v10h-2zM16 6h2v2h-2zM14 8h2v2h-2zM12 10h2v2h-2zM10 12h2v2h-2zM8 14h2v2H8zM6 16h2v2H6zM4 18h2v2H4z"/></symbol>
+    <symbol id="px-arrow-down" viewBox="0 0 24 24"><path d="M8 18h12v2H8zM18 8h2v10h-2zM16 16h2v2h-2zM14 14h2v2h-2zM12 12h2v2h-2zM10 10h2v2h-2zM8 8h2v2H8zM6 6h2v2H6zM4 4h2v2H4z"/></symbol>
+    <symbol id="px-copy" viewBox="0 0 24 24"><path d="M8 2h14v2H8zM20 4h2v12h-2zM16 14h4v2h-4zM8 4h2v4H8zM2 8h14v2H2zM2 20h14v2H2zM2 10h2v10H2zM14 10h2v10h-2z"/></symbol>
+  </svg>
+
+  <div class="frame" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" aria-hidden="true"><span class="cursor__label"></span></div>
+  <figure class="preview" aria-hidden="true"><img alt="" src="assets/img/crawlerlab-labyrinth.webp" loading="lazy" decoding="async"></figure>
+
+  <header class="nav" data-nav>
+    <nav class="nav__side" aria-label="Projects">
+      <a href="#work">Work</a>
+      <a href="#crawlerlab">CrawlerLab</a>
+      <a href="#radius">Radius</a>
+    </nav>
+    <a class="nav__brand" href="#top" aria-label="Akshay Damle, back to top">
+      <svg class="nav__mark" aria-hidden="true" focusable="false"><use href="#px-mark"/></svg>
+      <span class="nav__name"><span>Akshay</span> <span>Damle</span></span>
+    </a>
+    <div class="nav__side nav__side--end">
+      <a href="#manifesto">About</a>
+      <a class="nav__ext" href="https://github.com/codezxsWIN" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="btn btn--nav" href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero t-primary" aria-labelledby="hero-title">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="label kicker" data-hero-fade><span>Portfolio ’26</span><i aria-hidden="true"></i><span>Security · AI · Tools · Research</span></p>
+          <h1 class="hero__title" id="hero-title">
+            <span class="line"><span>Catching what’s</span></span>
+            <span class="line"><span>designed to</span></span>
+            <span class="line"><span>look <em>human.</em></span></span>
+          </h1>
+          <p class="hero__intro" data-hero-fade>Akshay Damle builds open, evidence-first software across security, AI and the web. Bot detection is one thread — curiosity is the rest.</p>
+          <div class="hero__actions" data-hero-fade>
+            <a class="btn" href="#work"><svg class="px" aria-hidden="true" focusable="false"><use href="#px-arrow-down"/></svg>See the work</a>
+            <a class="btn btn--alt" href="https://github.com/codezxsWIN" target="_blank" rel="noopener noreferrer"><svg class="px" aria-hidden="true" focusable="false"><use href="#px-arrow"/></svg>GitHub</a>
+          </div>
+          <div class="install" data-hero-fade>
+            <p class="label" id="try-label">Run a demo via terminal</p>
+            <div class="term" data-tabs>
+              <div class="term__tabs" role="tablist" aria-labelledby="try-label">
+                <button type="button" role="tab" id="tab-cl" aria-controls="panel-cl" aria-selected="true"><span aria-hidden="true">:</span>CrawlerLab<span aria-hidden="true">:</span></button>
+                <button type="button" role="tab" id="tab-br" aria-controls="panel-br" aria-selected="false" tabindex="-1"><span aria-hidden="true">:</span>Radius<span aria-hidden="true">:</span></button>
+              </div>
+              <div class="term__panel" role="tabpanel" id="panel-cl" aria-labelledby="tab-cl">
+                <code>python -m crawlerlab demo</code>
+                <button class="term__copy" type="button" data-copy="python -m crawlerlab demo" aria-label="Copy command: python -m crawlerlab demo"><span class="term__state" data-copy-state aria-live="polite">copy</span><svg class="px" aria-hidden="true" focusable="false"><use href="#px-copy"/></svg></button>
+              </div>
+              <div class="term__panel" role="tabpanel" id="panel-br" aria-labelledby="tab-br" hidden>
+                <code>python -I -m blastradius learn</code>
+                <button class="term__copy" type="button" data-copy="python -I -m blastradius learn" aria-label="Copy command: python -I -m blastradius learn"><span class="term__state" data-copy-state aria-live="polite">copy</span><svg class="px" aria-hidden="true" focusable="false"><use href="#px-copy"/></svg></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <figure class="hero__art" data-hero-fade>
+          <canvas class="hero__print" data-print aria-hidden="true"></canvas>
+          <aside class="win win--readout" data-keep-clear aria-label="Print scan readout">
+            <p class="win__bar"><span>print.scan</span><i aria-hidden="true"></i><span class="pulse" aria-hidden="true"></span></p>
+            <dl class="readout">
+              <div><dt>organic</dt><dd data-organic>50%</dd></div>
+              <div><dt>synthetic</dt><dd data-synthetic>50%</dd></div>
+              <div><dt>verdict</dt><dd data-verdict data-state="challenge">challenge</dd></div>
+            </dl>
+            <p class="readout__hint"><span class="hint--fine">Move across the print</span><span class="hint--touch">Tap across the print</span></p>
+          </aside>
+          <figcaption class="sr-only">An engraved fingerprint inside a burst of light. Past a moving scan line the same print turns into a dot-matrix imitation — designed to look human.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- MANIFESTO -->
+    <section class="manifesto t-paper" id="manifesto" aria-label="Principles">
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee__track">
+          <span>Evidence before interpretation</span><i></i><span class="o">Publish the misses</span><i></i><span>Curiosity, then consistency</span><i></i><span class="o">Least privilege ≠ zero privilege</span><i></i>
+          <span>Evidence before interpretation</span><i></i><span class="o">Publish the misses</span><i></i><span>Curiosity, then consistency</span><i></i><span class="o">Least privilege ≠ zero privilege</span><i></i>
+        </div>
+      </div>
+
+      <div class="wrap">
+        <div class="about">
+          <p class="label about__label">About</p>
+          <p class="about__text" data-words>I build things to answer questions that don’t have answers yet — then make the answer <em>measurable</em> and publish exactly where it fails. Lately that’s meant automation pretending to be human, AI under adversarial pressure and access that reaches too far.</p>
+          <div class="win win--status" data-reveal>
+            <p class="win__bar"><span>status.txt</span><i aria-hidden="true"></i></p>
+            <dl class="status" aria-label="Current status">
+              <div><dt>Now</dt><dd>Security &amp; AI research · open tools</dd></div>
+              <div><dt>Building</dt><dd>Testbeds, analyzers &amp; interactive explainers</dd></div>
+              <div><dt>Asking</dt><dd>What would an honest measurement look like?</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="sect-head">
+          <h2 class="h2" id="focus-title">Focus</h2>
+          <svg class="px sect-head__icon" aria-hidden="true" focusable="false"><use href="#px-spark"/></svg>
+        </div>
+        <ol class="focus" aria-labelledby="focus-title">
+          <li data-reveal>
+            <div class="focus__head"><span class="focus__n label">#01 Secure</span><h3>Security research</h3></div>
+            <p>Bots, agents and over-reaching credentials — finding where systems trust the wrong thing, then building the tool that proves it.</p>
+            <figure class="focus__art"><canvas data-dither="fingerprint" aria-hidden="true"></canvas></figure>
+          </li>
+          <li data-reveal>
+            <div class="focus__head"><span class="focus__n label">#02 Probe</span><h3>AI systems</h3></div>
+            <p>How models and agents behave under pressure — prompt injection, manipulation and the gap between what a system should do and what it does.</p>
+            <figure class="focus__art"><canvas data-dither="orb" aria-hidden="true"></canvas></figure>
+          </li>
+          <li data-reveal>
+            <div class="focus__head"><span class="focus__n label">#03 Build</span><h3>Tools &amp; interfaces</h3></div>
+            <p>Testbeds, analyzers and interactive explainers — software that turns a hard idea into something you can see, run and check.</p>
+            <figure class="focus__art"><canvas data-dither="waves" aria-hidden="true"></canvas></figure>
+          </li>
+          <li data-reveal>
+            <div class="focus__head"><span class="focus__n label">#04 Question</span><h3>Research mindset</h3></div>
+            <p>Ask the question that does not have an answer yet. Build something that forces it out. Document what breaks.</p>
+            <figure class="focus__art"><canvas data-dither="tunnel" aria-hidden="true"></canvas></figure>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- WORK INDEX -->
+    <section class="work t-paper" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <div class="sect-head">
+          <h2 class="h2" id="work-title">Selected work <span class="sect-head__count">(02)</span></h2>
+          <svg class="px sect-head__icon" aria-hidden="true" focusable="false"><use href="#px-target"/></svg>
+          <p class="work__note">Two projects, in depth. Everything else lives on <a class="link" href="https://github.com/codezxsWIN" target="_blank" rel="noopener noreferrer">GitHub ↗</a></p>
+        </div>
+        <ul class="index">
+          <li>
+            <a class="index__row" href="#crawlerlab" data-preview="assets/img/crawlerlab-labyrinth.webp" data-cursor="Open">
+              <span class="index__n">01</span>
+              <span class="index__name">CrawlerLab</span>
+              <span class="index__desc">Crawler &amp; agent defence testbed</span>
+              <span class="index__meta">Python · 2026</span>
+              <span class="index__arrow" aria-hidden="true"><svg class="px" focusable="false"><use href="#px-arrow-down"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="index__row" href="#radius" data-preview="assets/img/radius-disc.webp" data-cursor="Open">
+              <span class="index__n">02</span>
+              <span class="index__name">Radius</span>
+              <span class="index__desc">Credential reach &amp; least-privilege lab</span>
+              <span class="index__meta">Python · JS · 2026</span>
+              <span class="index__arrow" aria-hidden="true"><svg class="px" focusable="false"><use href="#px-arrow-down"/></svg></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CASE 01 — CRAWLERLAB -->
+    <article class="case case--crawler t-primary" id="crawlerlab" aria-labelledby="cl-title">
+      <div class="wrap">
+        <header class="case__head">
+          <span class="case__num" aria-hidden="true" data-n="01"></span>
+          <h2 class="case__title" id="cl-title" data-morph>CrawlerLab</h2>
+          <p class="case__tagline" data-reveal>An open, independent testbed for measuring crawler and agent defences — with an explainable reference implementation for <em>bounded deception.</em></p>
+          <dl class="case__meta" data-reveal>
+            <div><dt>Type</dt><dd>Open research testbed</dd></div>
+            <div><dt>Stack</dt><dd>Python 3.11+ · stdlib core · HTTPX · Uvicorn</dd></div>
+            <div><dt>Status</dt><dd>v0.2 alpha · Apache-2.0</dd></div>
+            <div><dt>Links</dt><dd><a class="link" href="https://github.com/codezxsWIN/crawlerlab" target="_blank" rel="noopener noreferrer">Repository ↗</a></dd></div>
+          </dl>
+        </header>
+
+        <figure class="shot" data-clip>
+          <div class="shot__bar" aria-hidden="true"><i></i><i></i><i></i><span>127.0.0.1:8787 — Living Labyrinth operator</span></div>
+          <div class="shot__img"><img src="assets/img/crawlerlab-labyrinth.webp" width="1440" height="900" loading="lazy" decoding="async" alt="CrawlerLab Living Labyrinth: an aggressive request travels through the maze to a 90-point challenge and a locked provenance gate."></div>
+          <figcaption class="label">The Living Labyrinth — one request traced from gateway to a locked provenance gate.</figcaption>
+        </figure>
+
+        <div class="story">
+          <div class="story__item" data-reveal><h3 class="label">#1 The question</h3><p>Crawler and agent defences make strong claims that are hard to check. What would an honest, reproducible measurement look like?</p></div>
+          <div class="story__item" data-reveal><h3 class="label">#2 The approach</h3><p>A fixed-origin gateway scores independent request and behaviour signals in off, shadow or live mode. Every decision leaves an evidence trail; suspicious clients can be led into a signed, expiring, finite decoy maze.</p></div>
+          <div class="story__item" data-reveal><h3 class="label">#3 The rule</h3><p>Headers are evidence, not identity. A score of 90 from headers and rate alone still cannot authorize diversion.</p></div>
+        </div>
+
+        <!-- Decision model simulator -->
+        <section class="sim" data-sim aria-labelledby="sim-title">
+          <p class="win__bar"><span>crawlerlab · decision-model</span><i aria-hidden="true"></i><span class="win__tag">Interactive</span></p>
+          <div class="sim__head">
+            <div class="sect-head sect-head--sm">
+              <h3 class="sim__title" id="sim-title">Score a request yourself.</h3>
+              <svg class="px sect-head__icon" aria-hidden="true" focusable="false"><use href="#px-sliders"/></svg>
+            </div>
+            <div class="sim__presets" role="group" aria-label="Lesson scenarios">
+              <button type="button" data-preset="normal" aria-pressed="true"><span aria-hidden="true">:</span>A normal visit<span aria-hidden="true">:</span></button>
+              <button type="button" data-preset="useful" aria-pressed="false"><span aria-hidden="true">:</span>Useful automation<span aria-hidden="true">:</span></button>
+              <button type="button" data-preset="lookalike" aria-pressed="false"><span aria-hidden="true">:</span>Browser lookalike<span aria-hidden="true">:</span></button>
+              <button type="button" data-preset="volume" aria-pressed="false"><span aria-hidden="true">:</span>High volume<span aria-hidden="true">:</span></button>
+              <button type="button" data-preset="maze" aria-pressed="false"><span aria-hidden="true">:</span>Canary → maze<span aria-hidden="true">:</span></button>
+            </div>
+          </div>
+
+          <div class="sim__grid">
+            <div class="sim__signals" role="group" aria-label="Request and behaviour signals">
+              <div class="sig" data-signal="client"><span class="sig__name">Named automation client</span><span class="sig__levels"><button type="button" data-level="0">off</button><button type="button" data-level="35">+35</button></span></div>
+              <div class="sig" data-signal="noua"><span class="sig__name">Missing User-Agent</span><span class="sig__levels"><button type="button" data-level="0">off</button><button type="button" data-level="25">+25</button></span></div>
+              <div class="sig" data-signal="meta"><span class="sig__name">Inconsistent browser metadata</span><span class="sig__levels"><button type="button" data-level="0">off</button><button type="button" data-level="18">+18</button></span></div>
+              <div class="sig" data-signal="robots"><span class="sig__name">Robots exclusions ignored</span><span class="sig__levels"><button type="button" data-level="0">off</button><button type="button" data-level="15">+15</button><button type="button" data-level="30">+30</button></span></div>
+              <div class="sig" data-signal="rate"><span class="sig__name">&gt;120 requests per minute</span><span class="sig__levels"><button type="button" data-level="0">off</button><button type="button" data-level="20">+20</button></span></div>
+              <div class="sig" data-signal="decoy"><span class="sig__name">Traversed a signed decoy</span><span class="sig__levels"><button type="button" data-level="0">off</button><button type="button" data-level="40">+40</button><button type="button" data-level="60">+60</button></span></div>
+              <div class="sig" data-signal="neg"><span class="sig__name">Weak content negotiation</span><span class="sig__levels"><button type="button" data-level="0">off</button><button type="button" data-level="7">+7</button><button type="button" data-level="8">+8</button></span></div>
+            </div>
+
+            <div class="sim__out" data-action-state="allow">
+              <p class="label">Heuristic total</p>
+              <p class="sim__score" data-score>0</p>
+              <div class="meter" aria-hidden="true">
+                <div class="meter__fill" data-meter></div>
+                <span class="meter__mark" style="--at:20%">20 observe</span>
+                <span class="meter__mark" style="--at:45%">45 challenge</span>
+              </div>
+              <p class="sim__action"><span class="label">Action</span> <strong data-action>allow</strong></p>
+              <p class="sim__gate" data-gate>Divert locked — needs challenge-level evidence and signed decoy provenance.</p>
+              <pre class="sim__trail" data-trail></pre>
+              <p class="sim__note" data-note aria-live="polite">Let through. No signal fired.</p>
+            </div>
+          </div>
+          <p class="fine">Weights and thresholds from CrawlerLab’s published decision model: allow below 20, observe below 45, challenge at 45 or higher; divert additionally requires signed decoy provenance. Scores are heuristic totals, not probabilities or proof of intent.</p>
+        </section>
+
+        <!-- Honest evaluation -->
+        <section class="eval" aria-labelledby="eval-title">
+          <div class="eval__text">
+            <p class="label">Honest evaluation</p>
+            <div class="sect-head sect-head--sm">
+              <h3 class="eval__title" id="eval-title" data-reveal>It names its own misses.</h3>
+              <svg class="px sect-head__icon" aria-hidden="true" focusable="false"><use href="#px-check"/></svg>
+            </div>
+            <p data-reveal>Ten synthetic cases form a regression baseline — not evidence of production efficacy. The two misses are printed in the output, not hidden:</p>
+            <p class="eval__miss" data-reveal><code>anonymous-minimal-client</code> <code>careful-curl-harvester</code></p>
+            <dl class="stats" data-reveal>
+              <div><dt>Precision</dt><dd data-count="1" data-decimals="3">1.000</dd></div>
+              <div><dt>Recall</dt><dd data-count="0.667" data-decimals="3">0.667</dd></div>
+              <div><dt>F1</dt><dd data-count="0.8" data-decimals="3">0.800</dd></div>
+              <div><dt>False positives</dt><dd data-count="0">0</dd></div>
+              <div><dt>False negatives</dt><dd data-count="2">2</dd></div>
+            </dl>
+          </div>
+          <figure class="term-shot" data-reveal>
+            <img src="assets/img/crawlerlab-matrix.gif" width="1200" height="700" loading="lazy" decoding="async" alt="Animated terminal showing the synthetic-v1 detection and gate matrices with sample-size caveats.">
+            <figcaption class="label">synthetic-v1 — six reference policies × seven cumulative evasion tiers.</figcaption>
+          </figure>
+        </section>
+
+        <!-- Layers -->
+        <section class="layers" aria-labelledby="layers-title">
+          <div class="sect-head sect-head--sm">
+            <h3 class="layers__title" id="layers-title">What’s inside — and the safety property of each layer</h3>
+            <svg class="px sect-head__icon" aria-hidden="true" focusable="false"><use href="#px-layers"/></svg>
+          </div>
+          <ul class="layers__grid">
+            <li data-reveal><span class="label">L01</span><h4>Detector</h4><p>Scores independent request and behaviour signals.</p><p class="layers__safe">No diversion from weak header evidence alone.</p></li>
+            <li data-reveal><span class="label">L02</span><h4>Canary</h4><p>Adds a non-public link to eligible suspicious HTML.</p><p class="layers__safe">Never in shadow mode or below threshold.</p></li>
+            <li data-reveal><span class="label">L03</span><h4>Ticket signer</h4><p>Authenticates maze state with HMAC-SHA256.</p><p class="layers__safe">Forged and expired routes look like ordinary 404s.</p></li>
+            <li data-reveal><span class="label">L04</span><h4>Decoy corpus</h4><p>Serves deterministic, curated factual notes.</p><p class="layers__safe">No runtime generation, no misinformation.</p></li>
+            <li data-reveal><span class="label">L05</span><h4>Telemetry</h4><p>Records scores, actions and signal codes.</p><p class="layers__safe">No raw IP, body, cookie or full User-Agent.</p></li>
+            <li data-reveal><span class="label">L06</span><h4>Operator</h4><p>Shows real gateway state and pseudonymous events.</p><p class="layers__safe">Refuses non-loopback binding.</p></li>
+          </ul>
+        </section>
+
+        <footer class="case__foot">
+          <p class="case__guard">Defensive research only. It does not retaliate, exploit clients, poison training data, or make claims about crawler ownership. The maze concept is inspired by Cloudflare AI Labyrinth; CrawlerLab is independent and not affiliated.</p>
+          <div class="case__cta">
+            <button class="cmd" type="button" data-copy="python -m crawlerlab demo"><span class="cmd__prompt" aria-hidden="true">$</span> python -m crawlerlab demo <span class="cmd__state" data-copy-state>copy</span></button>
+            <a class="btn" href="https://github.com/codezxsWIN/crawlerlab" target="_blank" rel="noopener noreferrer" data-cursor="GitHub"><svg class="px" aria-hidden="true" focusable="false"><use href="#px-arrow"/></svg>View repository</a>
+          </div>
+        </footer>
+      </div>
+    </article>
+
+    <!-- CASE 02 — RADIUS -->
+    <article class="case case--radius t-paper" id="radius" aria-labelledby="br-title">
+      <div class="wrap">
+        <header class="case__head">
+          <span class="case__num" aria-hidden="true" data-n="02"></span>
+          <h2 class="case__title" id="br-title" data-morph>Radius</h2>
+          <p class="case__tagline" data-reveal><em>Blast Radius</em> — learn what a credential can reach, then test a change without touching a cloud account.</p>
+          <dl class="case__meta" data-reveal>
+            <div><dt>Type</dt><dd>Offline authorization lab + repository analyzer</dd></div>
+            <div><dt>Stack</dt><dd>Python 3.12+ · vanilla JS · single-file HTML</dd></div>
+            <div><dt>Exports</dt><dd>JSON · Markdown · HTML · SARIF</dd></div>
+            <div><dt>Links</dt><dd><a class="link" href="https://github.com/codezxsWIN/radius" target="_blank" rel="noopener noreferrer">Repository ↗</a></dd></div>
+          </dl>
+        </header>
+
+        <!-- First lesson; predictions and feedback follow the current grants. -->
+        <section class="lesson" data-lesson aria-labelledby="lesson-title">
+          <p class="win__bar"><span>blastradius · lesson-01</span><i aria-hidden="true"></i><span class="win__tag">Interactive</span></p>
+          <div class="lesson__grid">
+            <div class="lesson__side">
+              <div class="sect-head sect-head--sm">
+                <h3 class="lesson__title" id="lesson-title">Which access does this job need?</h3>
+                <svg class="px sect-head__icon" aria-hidden="true" focusable="false"><use href="#px-key"/></svg>
+              </div>
+              <ol class="lesson__steps">
+                <li><button type="button" data-step="0" aria-pressed="true"><span>01</span> Predict the reach</button></li>
+                <li><button type="button" data-step="1" aria-pressed="false"><span>02</span> Remove the grant</button></li>
+                <li><button type="button" data-step="2" aria-pressed="false"><span>03</span> Remove only write</button></li>
+              </ol>
+              <div class="lesson__panel" data-panel aria-live="polite"></div>
+            </div>
+
+            <div class="lesson__board">
+              <svg class="graph" viewBox="0 0 720 400" role="img" aria-labelledby="graph-desc">
+                <desc id="graph-desc">Fictional five-node graph: build-job assumes ci-role, which is attached to a policy granting access to an artifacts bucket and a secrets vault.</desc>
+                <g class="graph__edges">
+                  <path class="edge edge--fixed" d="M92 200 H206"/>
+                  <path class="edge edge--fixed" d="M254 200 H362"/>
+                  <path class="edge" data-edge="ar" d="M414 186 C 470 140, 520 112, 578 104"/>
+                  <path class="edge" data-edge="aw" d="M414 196 C 480 168, 528 138, 578 124"/>
+                  <path class="edge" data-edge="vr" d="M414 204 C 480 232, 528 262, 578 276"/>
+                  <path class="edge" data-edge="vw" d="M414 214 C 470 260, 520 288, 578 296"/>
+                </g>
+                <g class="graph__labels">
+                  <text x="149" y="188" text-anchor="middle">assumes</text>
+                  <text x="308" y="188" text-anchor="middle">attached</text>
+                  <text data-edge-label="ar" x="462" y="128">read</text>
+                  <text data-edge-label="aw" x="478" y="182">write</text>
+                  <text data-edge-label="vr" x="478" y="226">read</text>
+                  <text data-edge-label="vw" x="462" y="284">write</text>
+                </g>
+                <g class="node node--workload" transform="translate(70 200)"><circle r="22"/><text y="50" text-anchor="middle">build-job</text><text class="node__kind" y="66" text-anchor="middle">workload</text></g>
+                <g class="node node--credential" transform="translate(230 200)"><rect x="-17" y="-17" width="34" height="34" transform="rotate(45)"/><text y="50" text-anchor="middle">ci-role</text><text class="node__kind" y="66" text-anchor="middle">credential</text></g>
+                <g class="node node--policy" transform="translate(388 200)"><rect x="-26" y="-18" width="52" height="36" rx="2"/><text y="50" text-anchor="middle">policy</text><text class="node__kind" y="66" text-anchor="middle">grant set</text></g>
+                <g class="node node--resource" data-node="artifacts" transform="translate(604 106)"><rect x="-22" y="-22" width="44" height="44"/><text y="46" text-anchor="middle">artifacts</text><text class="node__kind" y="62" text-anchor="middle">bucket · needed: read</text></g>
+                <g class="node node--resource" data-node="vault" transform="translate(604 294)"><rect x="-22" y="-22" width="44" height="44"/><text y="46" text-anchor="middle">vault</text><text class="node__kind" y="62" text-anchor="middle">secrets</text></g>
+              </svg>
+
+              <div class="grants" role="group" aria-label="Grants on ci-role">
+                <button type="button" data-grant="ar" aria-pressed="true">artifacts · read</button>
+                <button type="button" data-grant="aw" aria-pressed="false">artifacts · write</button>
+                <button type="button" data-grant="vr" aria-pressed="false">vault · read</button>
+                <button type="button" data-grant="vw" aria-pressed="false">vault · write</button>
+              </div>
+
+              <dl class="reach">
+                <div><dt>Reach</dt><dd><span data-reach>1</span><small> / 4 pairs</small></dd></div>
+                <div><dt>Unnecessary</dt><dd data-extra>0</dd></div>
+                <div><dt>Required work</dt><dd data-required>runs</dd></div>
+              </dl>
+            </div>
+            <p class="fine">A fictional graph recreated from Blast Radius’s offline first lesson. Educational model — not live-cloud verification.</p>
+          </div>
+        </section>
+
+        <blockquote class="pull" data-reveal>
+          <p>Least privilege means preserving required work while removing unnecessary access — <em>not making every permission count zero.</em></p>
+        </blockquote>
+      </div>
+
+      <!-- Plates -->
+      <section class="plates" data-plates aria-labelledby="plates-title" tabindex="0">
+        <div class="plates__track" data-track>
+          <div class="plates__intro">
+            <p class="label">Figure plates</p>
+            <div class="sect-head sect-head--sm">
+              <h3 class="plates__title" id="plates-title">One renderer. Five honest pictures.</h3>
+              <svg class="px sect-head__icon" aria-hidden="true" focusable="false"><use href="#px-frame"/></svg>
+            </div>
+            <p>SVG, PNG and PDF from shared tokens. Every caption says what the figure is <em>not.</em> All are illustrative synthetic engine outputs, not observed enterprise risk.</p>
+            <p class="label plates__hint"><span class="hint--fine">Scroll to explore →</span><span class="hint--touch">Swipe →</span></p>
+          </div>
+          <figure class="plate"><div class="plate__img"><img src="assets/img/radius-disc.webp" width="1600" height="1181" loading="lazy" decoding="async" alt="Disc figure: disc area encodes canonical radius, rings encode minimum escalation cost."></div><figcaption><span>Fig. 01 — Disc</span>Disc area encodes canonical radius; rings encode minimum escalation cost; points encode unique resource–action pairs.</figcaption></figure>
+          <figure class="plate"><div class="plate__img"><img src="assets/img/radius-path.webp" width="1600" height="903" loading="lazy" decoding="async" alt="Path figure: stations and edges show the shortest escalation witness."></div><figcaption><span>Fig. 02 — Path</span>Stations and edges show the chosen shortest-escalation witness; dashed segments are explicit illustrative assumptions.</figcaption></figure>
+          <figure class="plate"><div class="plate__img"><img src="assets/img/radius-whatif.webp" width="1600" height="1181" loading="lazy" decoding="async" alt="What-if figure: one evaluated binding removal in a fixed universe."></div><figcaption><span>Fig. 03 — What-if</span>One evaluated binding removal, fixed universe — not a globally optimal remediation plan.</figcaption></figure>
+          <figure class="plate"><div class="plate__img"><img src="assets/img/radius-treemap.webp" width="1600" height="1181" loading="lazy" decoding="async" alt="Treemap figure: area encodes absolute credential reach, color is principal type."></div><figcaption><span>Fig. 04 — Treemap</span>Area encodes absolute credential reach; colour is principal type; the p95 outline is not a risk class.</figcaption></figure>
+          <figure class="plate"><div class="plate__img"><img src="assets/img/radius-models.webp" width="1600" height="1181" loading="lazy" decoding="async" alt="Models figure: default versus strict reach under different attacker assumptions."></div><figcaption><span>Fig. 05 — Models</span>Default versus strict reach under different attacker assumptions — not estimated attack probabilities.</figcaption></figure>
+        </div>
+        <div class="plates__progress" aria-hidden="true"><span data-plates-bar></span></div>
+      </section>
+
+      <div class="wrap">
+        <!-- Analyzer -->
+        <section class="analyzer" aria-labelledby="an-title">
+          <div class="analyzer__head">
+            <p class="label">Optional analyzer</p>
+            <div class="sect-head sect-head--sm">
+              <h3 class="analyzer__title" id="an-title" data-reveal>Target source is data. <em>Nothing is executed.</em></h3>
+              <svg class="px sect-head__icon" aria-hidden="true" focusable="false"><use href="#px-term"/></svg>
+            </div>
+            <p data-reveal>Point it at a local checkout or a public GitHub URL. Workflows, Terraform, hooks and dependencies are read, never run. Analysis has a 120-second deadline, supports cooperative cancellation and never publishes a partial result.</p>
+          </div>
+          <ul class="inputs">
+            <li data-reveal><h4>GitHub Actions</h4><p><b>Assessed</b> Exact branch OIDC, finite matrices, literal env/matrix context.</p><p><b>Not assessed</b> Arbitrary expressions, secret values.</p></li>
+            <li data-reveal><h4>CloudFormation</h4><p><b>Assessed</b> Literal IAM role trust, finite Secrets Manager reads, same-template policy attachments.</p><p><b>Not assessed</b> Intrinsic evaluation, full policy composition.</p></li>
+            <li data-reveal><h4>Terraform JSON</h4><p><b>Assessed</b> Literal IAM role and inline policy declarations in one module file.</p><p><b>Not assessed</b> HCL, state or plans, provider execution.</p></li>
+          </ul>
+          <div class="win analyzer__zero" role="note" data-reveal>
+            <p class="win__bar"><span>analyzer · notice</span><i aria-hidden="true"></i></p>
+            <p class="analyzer__zero-text">“Zero findings means no complete path was proven within this profile — not that the repository is safe.”</p>
+          </div>
+        </section>
+
+        <footer class="case__foot">
+          <p class="case__guard">The offline lesson needs no installation, server, cloud credentials or network — open <code>ui/index.html</code>. Unrelated to the Blast-RADIUS RADIUS/UDP vulnerability.</p>
+          <div class="case__cta">
+            <button class="cmd" type="button" data-copy="python -I -m blastradius learn"><span class="cmd__prompt" aria-hidden="true">$</span> python -I -m blastradius learn <span class="cmd__state" data-copy-state>copy</span></button>
+            <a class="btn" href="https://github.com/codezxsWIN/radius" target="_blank" rel="noopener noreferrer" data-cursor="GitHub"><svg class="px" aria-hidden="true" focusable="false"><use href="#px-arrow"/></svg>View repository</a>
+          </div>
+        </footer>
+      </div>
+    </article>
+
+    <!-- CONTACT -->
+    <section class="contact t-primary" id="contact" aria-labelledby="contact-title">
+      <div class="wrap">
+        <p class="label">Contact</p>
+        <p class="contact__lead" data-reveal>Have a question that doesn’t have an answer yet?</p>
+        <h2 class="contact__title" id="contact-title"><a href="https://www.linkedin.com/in/akshay-damle-858263252/" target="_blank" rel="noopener noreferrer" data-cursor="Say hi">Let’s talk <svg class="px" aria-hidden="true" focusable="false"><use href="#px-arrow"/></svg></a></h2>
+        <ul class="contact__links">
+          <li><a class="btn" href="https://www.linkedin.com/in/akshay-damle-858263252/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          <li><a class="btn btn--alt" href="https://github.com/codezxsWIN" target="_blank" rel="noopener noreferrer">GitHub — codezxsWIN</a></li>
+          <li><a class="btn btn--alt" href="https://github.com/codezxsWIN/crawlerlab" target="_blank" rel="noopener noreferrer">CrawlerLab</a></li>
+          <li><a class="btn btn--alt" href="https://github.com/codezxsWIN/radius" target="_blank" rel="noopener noreferrer">Radius</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot t-primary">
+    <canvas class="foot__art" data-dither="horizon" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <p class="foot__name" aria-hidden="true"><span data-fit>Akshay Damle</span></p>
+      <div class="foot__cols">
+        <div class="foot__brand">
+          <svg class="foot__mark" aria-hidden="true" focusable="false"><use href="#px-mark"/></svg>
+          <p class="foot__quote">Curiosity is the beginning. Consistency is the multiplier.</p>
+        </div>
+        <div class="foot__col">
+          <p class="label">Work</p>
+          <ul><li><a href="#crawlerlab">CrawlerLab</a></li><li><a href="#radius">Radius</a></li></ul>
+        </div>
+        <div class="foot__col">
+          <p class="label">Elsewhere</p>
+          <ul><li><a href="https://github.com/codezxsWIN" target="_blank" rel="noopener noreferrer"><span>Go to</span> GitHub</a></li><li><a href="https://www.linkedin.com/in/akshay-damle-858263252/" target="_blank" rel="noopener noreferrer"><span>Go to</span> LinkedIn</a></li></ul>
+        </div>
+        <div class="foot__col">
+          <p class="label">Stack</p>
+          <p>Python · Java · Kotlin · JavaScript</p>
+        </div>
+      </div>
+      <div class="foot__row">
+        <p>© <span data-year>2026</span> Akshay Damle</p>
+        <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
